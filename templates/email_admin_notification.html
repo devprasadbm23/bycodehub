@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 700px; margin: 20px auto; background: #ffffff; border: 1px solid #ddd; }
+        .urgent { background: linear-gradient(135deg, #ff9800, #ff5722); color: white; padding: 20px; text-align: center; }
+        .urgent h1 { margin: 0; font-size: 24px; }
+        .content { padding: 30px; }
+        .info-box { background: #f0f8ff; border-left: 4px solid #4da3ff; padding: 15px; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #4da3ff; color: white; font-weight: 600; }
+        tr:hover { background: #f5f5f5; }
+        .message-box { background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0; white-space: pre-wrap; }
+        .action-button { display: inline-block; padding: 12px 25px; background: #4da3ff; color: white; text-decoration: none; border-radius: 5px; margin: 10px 5px; }
+        .footer { background: #f5f5f5; padding: 15px; text-align: center; color: #666; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="urgent">
+            <h1>⚠️ NEW PROJECT SUBMISSION</h1>
+            <p style="margin: 5px 0;">Immediate attention required</p>
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <strong>📅 Received:</strong> {{ submission.created_at.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+                <strong>🆔 Submission ID:</strong> #{{ submission.id }}
+            </div>
+            
+            <h2 style="color: #4da3ff;">Client Information</h2>
+            <table>
+                <tr>
+                    <th style="width: 30%;">Field</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td><strong>👤 Name</strong></td>
+                    <td>{{ submission.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>📧 Email</strong></td>
+                    <td><a href="mailto:{{ submission.email }}">{{ submission.email }}</a></td>
+                </tr>
+                <tr>
+                    <td><strong>📞 Phone</strong></td>
+                    <td><a href="tel:{{ submission.phone }}">{{ submission.phone }}</a></td>
+                </tr>
+                <tr>
+                    <td><strong>📋 Project Type</strong></td>
+                    <td><span style="background: #4da3ff; color: white; padding: 4px 12px; border-radius: 12px;">{{ submission.project_type }}</span></td>
+                </tr>
+                <tr>
+                    <td><strong>💰 Budget</strong></td>
+                    <td>{{ submission.budget or 'Not specified - Discuss with client' }}</td>
+                </tr>
+                <tr>
+                    <td><strong>📅 Deadline</strong></td>
+                    <td>{{ submission.deadline or 'Flexible - Discuss with client' }}</td>
+                </tr>
+            </table>
+            
+            <h3 style="color: #4da3ff;">📝 Project Description:</h3>
+            <div class="message-box">{{ submission.message }}</div>
+            
+            <h3 style="color: #ff9800;">🎯 Action Required:</h3>
+            <ul>
+                <li>Review project requirements carefully</li>
+                <li>Contact client within 24 hours</li>
+                <li>Prepare quotation and timeline</li>
+                <li>Update status in admin panel</li>
+            </ul>
+            
+            <center>
+                <a href="http://localhost:5000/admin/submissions" class="action-button">🔍 View in Admin Panel</a>
+                <a href="https://wa.me/{{ submission.phone.replace('+', '').replace(' ', '') }}" class="action-button" style="background: #25D366;">💬 Contact on WhatsApp</a>
+                <a href="mailto:{{ submission.email }}" class="action-button" style="background: #f44336;">📧 Send Email</a>
+            </center>
+        </div>
+        
+        <div class="footer">
+            <p style="margin: 5px 0;"><strong>ByCodeHub Admin System</strong></p>
+            <p style="margin: 5px 0; font-size: 14px;">This is an automated notification. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>

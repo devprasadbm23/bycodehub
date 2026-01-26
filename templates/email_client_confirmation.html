@@ -1,0 +1,85 @@
+<!-- email_client_confirmation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
+        .header { background: linear-gradient(135deg, #4da3ff, #2196f3); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 28px; }
+        .content { padding: 30px 20px; background: #f9f9f9; }
+        .content h2 { color: #4da3ff; margin-top: 0; }
+        .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .detail-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .detail-item:last-child { border-bottom: none; }
+        .detail-label { font-weight: bold; color: #555; }
+        .detail-value { color: #333; margin-top: 5px; }
+        .footer { text-align: center; padding: 20px; color: #666; background: #f0f0f0; }
+        .button { display: inline-block; padding: 12px 30px; background: #4da3ff; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .highlight { background: #fff3cd; padding: 15px; border-left: 4px solid #ff9800; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 ByCodeHub</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Thank You for Your Submission!</p>
+        </div>
+        <div class="content">
+            <h2>Hello {{ submission.name }}! 👋</h2>
+            <p>Thank you for choosing ByCodeHub for your project development needs. We have successfully received your project requirement.</p>
+            
+            <div class="highlight">
+                <strong>⏰ What's Next?</strong><br>
+                Our team will review your requirements and get back to you within 24 hours with a detailed quotation and project timeline.
+            </div>
+            
+            <div class="details">
+                <h3 style="color: #4da3ff; margin-top: 0;">Your Submission Details:</h3>
+                
+                <div class="detail-item">
+                    <div class="detail-label">📋 Project Type:</div>
+                    <div class="detail-value">{{ submission.project_type }}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">💰 Budget Range:</div>
+                    <div class="detail-value">{{ submission.budget or 'To be discussed' }}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">📅 Expected Deadline:</div>
+                    <div class="detail-value">{{ submission.deadline or 'Flexible' }}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">📝 Project Description:</div>
+                    <div class="detail-value">{{ submission.message }}</div>
+                </div>
+            </div>
+            
+            <p><strong>Need immediate assistance?</strong> Feel free to reach out to us:</p>
+            <p style="margin: 10px 0;">
+                📞 <strong>Phone:</strong> +91 900112530<br>
+                📧 <strong>Email:</strong> bycodehub@gmail.com<br>
+                💬 <strong>WhatsApp:</strong> <a href="https://wa.me/9900112530">Chat with us</a>
+            </p>
+            
+            <center>
+                <a href="https://wa.me/9900112530" class="button">💬 Chat on WhatsApp</a>
+            </center>
+        </div>
+        <div class="footer">
+            <p style="margin: 0;"><strong>ByCodeHub</strong></p>
+            <p style="margin: 5px 0;">Professional Project Development for Students</p>
+            <p style="margin: 10px 0; font-size: 14px;">
+                📞 +91 900112530 | ✉️ bycodehub@gmail.com<br>
+                📷 Instagram: @bycodehub
+            </p>
+            <p style="margin: 10px 0; font-size: 12px; color: #999;">&copy; 2025 ByCodeHub. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

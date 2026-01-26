@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ByCodeHub</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ByCodeHub Logo">
+                <span>ByCodeHub</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="{{ url_for('home') }}#home">Home</a>
+                <a href="{{ url_for('home') }}#services">Services</a>
+                <a href="{{ url_for('portfolio') }}">Portfolio</a>
+                <a href="{{ url_for('home') }}#testimonials">Testimonials</a>
+                <a href="{{ url_for('home') }}#contact">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio-page" style="padding-top: 120px;">
+        <h1 class="section-title">Our Portfolio</h1>
+        <p class="section-subtitle">Explore our successfully delivered projects</p>
+        
+        <div class="portfolio-filters">
+            <button type="button" class="filter-btn {{ 'active' if current_category == 'all' else '' }}" onclick="window.location.href='{{ url_for('portfolio', category='all') }}'">All Projects</button>
+            <button type="button" class="filter-btn {{ 'active' if current_category == 'web' else '' }}" onclick="window.location.href='{{ url_for('portfolio', category='web') }}'">Web Apps</button>
+            <button type="button" class="filter-btn {{ 'active' if current_category == 'ml' else '' }}" onclick="window.location.href='{{ url_for('portfolio', category='ml') }}'">Machine Learning</button>
+            <button type="button" class="filter-btn {{ 'active' if current_category == 'android' else '' }}" onclick="window.location.href='{{ url_for('portfolio', category='android') }}'">Android</button>
+        </div>
+        
+        <div class="portfolio-grid">
+            {% if projects %}
+                {% for project in projects %}
+                <div class="portfolio-item" data-category="{{ project.category }}">
+                    <img src="{{ project.image_url or url_for('static', filename='images/project-placeholder.jpg') }}" alt="{{ project.title }}">
+                    <div class="portfolio-overlay">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <span class="project-tech">{{ project.technologies }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-projects" style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #666;">
+                    <h3>No projects found in this category</h3>
+                    <p>Check back soon for updates!</p>
+                    <a href="{{ url_for('home') }}#contact" class="btn btn-primary" style="margin-top: 1rem;">Submit Your Project</a>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="text-center" style="margin-top: 3rem;">
+            <a href="{{ url_for('home') }}#contact" class="btn btn-primary">Start Your Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ByCodeHub</h4>
+                <p>Professional project development services for students. Transforming ideas into reality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="{{ url_for('home') }}#services">Services</a>
+                <a href="{{ url_for('portfolio') }}">Portfolio</a>
+                <a href="{{ url_for('home') }}#testimonials">Testimonials</a>
+                <a href="{{ url_for('home') }}#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="{{ url_for('home') }}#services">Web Development</a>
+                <a href="{{ url_for('home') }}#services">Machine Learning</a>
+                <a href="{{ url_for('home') }}#services">Android Apps</a>
+                <a href="{{ url_for('home') }}#services">Custom Projects</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📞 +91 900112530</p>
+                <p>✉️ bycodehub@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ByCodeHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/9900112530" class="floating-btn whatsapp-float" target="_blank" rel="noopener noreferrer">💬</a>
+    <a href="mailto:bycodehub@gmail.com" class="floating-btn email-float">✉️</a>
+    <button class="floating-btn scroll-top" id="scrollTop">↑</button>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Enhanced -->
+    <title>ByCodeHub | Professional Student Projects - Web, ML, Android Development</title>
+    <meta name="description"
+        content="ByCodeHub delivers high-quality final year projects, mini projects, and custom development solutions for students. Specializing in Web Applications, Python ML, and Android Apps.">
+    <meta name="keywords"
+        content="Final Year Projects, Python Machine Learning, Android Projects, Web Development, Student Projects, Custom Projects, ByCodeHub, College Projects">
+    <meta name="author" content="ByCodeHub">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ByCodeHub - Budget-Friendly Student Projects">
+    <meta property="og:description" content="Professional project development services for students">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ByCodeHub Logo">
+                <span>ByCodeHub</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#how-it-works">Process</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+                <a href="{{ url_for('admin_login') }}" class="admin-btn">Admin</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+            {{ message }}
+            <span class="flash-close">&times;</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- HERO Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="hero-logo" alt="ByCodeHub Logo">
+            <h1 class="hero-title">Transform Your Ideas Into Reality</h1>
+            <p class="hero-subtitle">Expert Development Services for Students</p>
+            <div class="hero-tags">
+                <span>💻 Web Apps</span>
+                <span>🤖 Python ML</span>
+                <span>📱 Android</span>
+                <span>⚙️ Custom Solutions</span>
+            </div>
+            <a href="#contact" class="btn btn-primary">Get Started Now</a>
+            <a href="#portfolio" class="btn btn-secondary">View Our Work</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="150">0</span>
+                <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="200">0</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="98">0</span>
+                <span class="stat-label">Success Rate %</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="section services-section" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Comprehensive solutions for all your project needs</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Web Applications</h3>
+                <p>Modern, responsive web applications using latest technologies like Flask, Django, React, and Node.js
+                </p>
+                <ul class="service-features">
+                    <li>Full-Stack Development</li>
+                    <li>Responsive Design</li>
+                    <li>Database Integration</li>
+                    <li>Admin Dashboards</li>
+                </ul>
+            </div>
+
+            <div class="service-card featured">
+                <div class="badge">Popular</div>
+                <div class="service-icon">🤖</div>
+                <h3>Python ML Projects</h3>
+                <p>Machine Learning and Data Science projects with complete implementation and documentation</p>
+                <ul class="service-features">
+                    <li>Predictive Models</li>
+                    <li>Data Analysis</li>
+                    <li>Deep Learning</li>
+                    <li>Model Deployment</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Android Applications</h3>
+                <p>Native Android apps with modern UI/UX and robust functionality</p>
+                <ul class="service-features">
+                    <li>Native Development</li>
+                    <li>Material Design</li>
+                    <li>API Integration</li>
+                    <li>Firebase Backend</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Custom Projects</h3>
+                <p>Tailored solutions for your specific college project requirements</p>
+                <ul class="service-features">
+                    <li>Any Technology Stack</li>
+                    <li>Custom Requirements</li>
+                    <li>Research Papers</li>
+                    <li>Presentations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section dark portfolio-section" id="portfolio">
+        <h2 class="section-title">Our Recent Work</h2>
+        <p class="section-subtitle">Check out some of our successfully delivered projects</p>
+
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Apps</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+            <button class="filter-btn" data-filter="android">Android</button>
+        </div>
+
+        <div class="portfolio-grid">
+            {% if projects %}
+            {% for project in projects %}
+            <div class="portfolio-item" data-category="{{ project.category }}">
+                <img src="{{ project.image_url or url_for('static', filename='images/project-placeholder.jpg') }}"
+                    alt="{{ project.title }}">
+                <div class="portfolio-overlay">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description[:100] }}...</p>
+                    <span class="project-tech">{{ project.technologies }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="portfolio-item">
+                <img src="{{ url_for('static', filename='images/project1.jpg') }}" alt="E-Commerce Platform">
+                <div class="portfolio-overlay">
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured online shopping platform with payment integration</p>
+                    <span class="project-tech">Flask, SQLite, Stripe</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="{{ url_for('static', filename='images/project2.jpg') }}" alt="Disease Prediction">
+                <div class="portfolio-overlay">
+                    <h3>Disease Prediction System</h3>
+                    <p>ML model for early disease detection using patient symptoms</p>
+                    <span class="project-tech">Python, TensorFlow, Scikit-learn</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="{{ url_for('static', filename='images/project3.jpg') }}" alt="Fitness Tracker">
+                <div class="portfolio-overlay">
+                    <h3>Fitness Tracker App</h3>
+                    <p>Android app for tracking workouts and nutrition</p>
+                    <span class="project-tech">Java, Firebase, Material UI</span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline">View All Projects</a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section how-it-works" id="how-it-works">
+        <h2 class="section-title">How We Work</h2>
+        <p class="section-subtitle">Simple 4-step process to deliver your project</p>
+
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Share Requirements</h3>
+                    <p>Tell us about your project, timeline, and specific needs through our contact form</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Analysis & Quote</h3>
+                    <p>We analyze your requirements and provide a detailed quote within 24 hours</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Development</h3>
+                    <p>Our team develops your project with regular updates and your feedback</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Delivery & Support</h3>
+                    <p>Get complete source code, documentation, and support until submission</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section dark testimonials-section" id="testimonials">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-subtitle">Real feedback from satisfied students</p>
+
+        <div class="testimonials-grid">
+            {% if testimonials %}
+            {% for testimonial in testimonials %}
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    {% for i in range(testimonial.rating) %}⭐{% endfor %}
+                </div>
+                <p class="testimonial-text">"{{ testimonial.feedback }}"</p>
+                <div class="testimonial-author">
+                    <strong>{{ testimonial.client_name }}</strong>
+                    <span>{{ testimonial.project_type }}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Excellent work! They delivered my ML project ahead of schedule with perfect
+                    documentation."</p>
+                <div class="testimonial-author">
+                    <strong>Rahul Sharma</strong>
+                    <span>ML Project</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Best decision for my final year project. Professional team and great
+                    support throughout."</p>
+                <div class="testimonial-author">
+                    <strong>Priya Patel</strong>
+                    <span>Web Application</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Amazing Android app development. Very responsive and understood all my
+                    requirements perfectly."</p>
+                <div class="testimonial-author">
+                    <strong>Amit Kumar</strong>
+                    <span>Android App</span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section why-section">
+        <h2 class="section-title">Why Choose ByCodeHub?</h2>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">💰</div>
+                <h3>Budget Friendly</h3>
+                <p>Student-friendly pricing without compromising on quality</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h3>Fast Delivery</h3>
+                <p>On-time delivery guaranteed with regular progress updates</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📚</div>
+                <h3>Complete Package</h3>
+                <p>Source code, documentation, PPT, and deployment guide included</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎯</div>
+                <h3>100% Original</h3>
+                <p>Unique projects tailored to your specific requirements</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🤝</div>
+                <h3>24/7 Support</h3>
+                <p>Continuous support until successful project submission</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">✅</div>
+                <h3>Quality Assured</h3>
+                <p>Thoroughly tested code with proper documentation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section dark contact-section" id="contact">
+        <h2 class="section-title">Let's Build Your Project</h2>
+        <p class="section-subtitle">Fill out the form and we'll get back to you within 24 hours</p>
+
+        <div class="contact-container">
+            <form action="/submit" method="POST" class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project">Project Type *</label>
+                        <select id="project" name="project" required>
+                            <option value="">Select Project Type</option>
+                            <option value="Web Application">Web Application</option>
+                            <option value="Python ML">Python ML / Data Science</option>
+                            <option value="Android App">Android Application</option>
+                            <option value="Custom Project">Custom Project</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget" name="budget">
+                            <option value="">Select Budget</option>
+                            <option value="Under ₹5000">Under ₹5,000</option>
+                            <option value="₹5000-₹10000">₹5,000 - ₹10,000</option>
+                            <option value="₹10000-₹20000">₹10,000 - ₹20,000</option>
+                            <option value="Above ₹20000">Above ₹20,000</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Expected Deadline</label>
+                        <input type="text" id="deadline" name="deadline" placeholder="e.g., 2 weeks, 1 month">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Project Description *</label>
+                    <textarea id="message" name="message" required rows="6"
+                        placeholder="Describe your project requirements in detail..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-submit">Submit Requirement</button>
+            </form>
+
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div>
+                        <strong>Phone</strong>
+                        <p>+91 900112530</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <div>
+                        <strong>Email</strong>
+                        <p>bycodehub@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">⏰</span>
+                    <div>
+                        <strong>Response Time</strong>
+                        <p>Within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://wa.me/+919900112530" target="_blank" rel="noopener noreferrer"
+                        class="social-link whatsapp-link">
+                        <span>💬</span> WhatsApp
+                    </a>
+                    <a href="https://instagram.com/bycodehub" target="_blank" rel="noopener noreferrer"
+                        class="social-link instagram-link">
+                        <span>📷</span> Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ByCodeHub</h4>
+                <p>Professional project development services for students. Transforming ideas into reality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#services">Web Development</a>
+                <a href="#services">Machine Learning</a>
+                <a href="#services">Android Apps</a>
+                <a href="#services">Custom Projects</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📞 +91 900112530</p>
+                <p>✉️ bycodehub@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ByCodeHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="https://wa.me/9900112530" class="floating-btn whatsapp-float" target="_blank" rel="noopener noreferrer"
+        title="Chat on WhatsApp">
+        💬
+    </a>
+    <a href="mailto:bycodehub@gmail.com?subject=Project%20Inquiry" class="floating-btn email-float" title="Send Email">
+        ✉️
+    </a>
+    <button class="floating-btn scroll-top" id="scrollTop" title="Back to Top">
+        ↑
+    </button>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
