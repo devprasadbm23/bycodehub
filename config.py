@@ -8,7 +8,17 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-in-prod")
     # Read DB URL from environment. For local development the fallback remains SQLite.
     DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///bycodehub.db')
-    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+
+    # Normalize DATABASE_URL so SQLAlchemy uses psycopg (psycopg3) instead of psycopg2.
+    raw_db_url = DATABASE_URL or ''
+    # Replace legacy postgres:// with postgresql+psycopg://
+    if raw_db_url.startswith('postgres://'):
+        raw_db_url = raw_db_url.replace('postgres://', 'postgresql+psycopg://', 1)
+    # If URL explicitly requests psycopg2, swap to psycopg
+    if '+psycopg2' in raw_db_url:
+        raw_db_url = raw_db_url.replace('+psycopg2', '+psycopg')
+
+    SQLALCHEMY_DATABASE_URI = raw_db_url if raw_db_url else DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # If psycopg (psycopg3) is used, prefer SQLAlchemy driver scheme 'postgresql+psycopg'
