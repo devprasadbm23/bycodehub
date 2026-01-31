@@ -55,30 +55,15 @@ def init_db():
 
 if __name__ == '__main__':
     with app.app_context():
-        # Check if DB needs init (simple check)
-        db_uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
-        # If using SQLite file, create file and default admin if missing
-        if db_uri.startswith('sqlite'):
-            db_path = db_uri.replace('sqlite:///', '')
-            if not os.path.exists(db_path):
-                db.create_all()
-                if not Admin.query.filter_by(username=app.config['ADMIN_USERNAME']).first():
-                    admin_user = Admin(username=app.config['ADMIN_USERNAME'])
-                    admin_user.set_password(app.config['ADMIN_PASSWORD'])
-                    db.session.add(admin_user)
-                    db.session.commit()
-                    print("Created default admin.")
-        else:
-            # For PostgreSQL/Neon, migrations should be applied during deploy.
-            # Here just ensure a default admin exists if DB is reachable.
-            try:
-                if not Admin.query.filter_by(username=app.config['ADMIN_USERNAME']).first():
-                    admin_user = Admin(username=app.config['ADMIN_USERNAME'])
-                    admin_user.set_password(app.config['ADMIN_PASSWORD'])
-                    db.session.add(admin_user)
-                    db.session.commit()
-                    print("Ensured default admin exists in the database.")
-            except Exception as e:
-                print("Warning: could not connect to database to create admin:", e)
+        # Ensure a default admin exists if DB is reachable (PostgreSQL expected).
+        try:
+            if not Admin.query.filter_by(username=app.config['ADMIN_USERNAME']).first():
+                admin_user = Admin(username=app.config['ADMIN_USERNAME'])
+                admin_user.set_password(app.config['ADMIN_PASSWORD'])
+                db.session.add(admin_user)
+                db.session.commit()
+                print("Ensured default admin exists in the database.")
+        except Exception as e:
+            print("Warning: could not connect to database to create admin:", e)
 
     app.run(debug=True)

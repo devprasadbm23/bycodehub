@@ -7,10 +7,13 @@ load_dotenv()
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-change-in-prod")
     # Read DB URL from environment. For local development the fallback remains SQLite.
-    DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///bycodehub.db')
+    # Require a PostgreSQL DATABASE_URL in production/deploy environments
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if not DATABASE_URL:
+        raise RuntimeError("DATABASE_URL environment variable is required and must point to a PostgreSQL database")
 
     # Normalize DATABASE_URL so SQLAlchemy uses psycopg (psycopg3) instead of psycopg2.
-    raw_db_url = DATABASE_URL or ''
+    raw_db_url = DATABASE_URL
     # Replace legacy postgres:// with postgresql+psycopg://
     if raw_db_url.startswith('postgres://'):
         raw_db_url = raw_db_url.replace('postgres://', 'postgresql+psycopg://', 1)
@@ -18,7 +21,7 @@ class Config:
     if '+psycopg2' in raw_db_url:
         raw_db_url = raw_db_url.replace('+psycopg2', '+psycopg')
 
-    SQLALCHEMY_DATABASE_URI = raw_db_url if raw_db_url else DATABASE_URL
+    SQLALCHEMY_DATABASE_URI = raw_db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # If psycopg (psycopg3) is used, prefer SQLAlchemy driver scheme 'postgresql+psycopg'

@@ -151,8 +151,9 @@ FLASK_ENV=development
 MAIL_USERNAME=your-email@gmail.com
 MAIL_PASSWORD=your-gmail-app-password-16-chars
 
-# Database (Optional - defaults to SQLite)
-# DATABASE_URL=sqlite:///bycodehub.db
+# Database (Required - PostgreSQL)
+# Example:
+# DATABASE_URL=postgresql+psycopg://username:password@localhost/bycodehub
 """
         
         with open('.env', 'w') as f:

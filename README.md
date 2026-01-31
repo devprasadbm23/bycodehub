@@ -19,7 +19,7 @@ ByCodeHub is a comprehensive web platform for delivering professional project de
 
 ### Backend Features
 - **RESTful API** - Clean API endpoints
-- **Database Integration** - SQLite with SQLAlchemy ORM
+- **Database Integration** - PostgreSQL with SQLAlchemy ORM
 - **Email System** - Automated notifications
 - **Admin Authentication** - Secure login system
 - **Status Management** - Track project progress
@@ -49,7 +49,7 @@ ByCodeHub is a comprehensive web platform for delivering professional project de
 - **Werkzeug** - Security utilities
 
 ### Database
-- SQLite (Development)
+- PostgreSQL (Development)
 - PostgreSQL ready (Production)
 
 ## 📁 Project Structure
@@ -85,7 +85,7 @@ bycodehub/
 │       └── project-placeholder.jpg
 │
 └── instance/
-    └── bycodehub.db      # SQLite database (auto-generated)
+    └── bycodehub.db      # (No local SQLite file used) PostgreSQL is required
 ```
 
 ## 🚀 Installation & Setup
@@ -444,7 +444,7 @@ with app.app_context():
         description="Full-featured online shopping platform",
         category="web",
         image_url="/static/images/project1.jpg",
-        technologies="Flask, SQLite, Stripe"
+        technologies="Flask, PostgreSQL, Stripe"
     )
     db.session.add(project)
     db.session.commit()
