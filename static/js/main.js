@@ -172,11 +172,23 @@ const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const project = document.getElementById('project').value;
-        const message = document.getElementById('message').value.trim();
+        const nameField = document.getElementById('name');
+        const emailField = document.getElementById('email');
+        const phoneField = document.getElementById('phone');
+        const projectField = document.getElementById('project');
+        const messageField = document.getElementById('message');
+        
+        // Ensure all fields exist before accessing
+        if (!nameField || !emailField || !phoneField || !projectField || !messageField) {
+            console.error('One or more form fields are missing from the DOM');
+            return;
+        }
+        
+        const name = nameField.value.trim();
+        const email = emailField.value.trim();
+        const phone = phoneField.value.trim();
+        const project = projectField.value;
+        const message = messageField.value.trim();
         
         let isValid = true;
         let errorMessage = '';
