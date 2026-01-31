@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,44 +11,44 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0f0f0f;
             color: #fff;
         }
-        
+
         .admin-header {
             background: #1a1a1a;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        
+
         .admin-logo {
             font-size: 1.5rem;
             font-weight: 700;
             color: #4da3ff;
         }
-        
+
         .admin-nav {
             display: flex;
             gap: 2rem;
             align-items: center;
         }
-        
+
         .admin-nav a {
             color: #fff;
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .admin-nav a:hover {
             color: #4da3ff;
         }
-        
+
         .logout-btn {
             background: #f44336;
             color: white;
@@ -58,80 +59,80 @@
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
-        
+
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
-        
+
         .page-title {
             font-size: 2rem;
             color: #4da3ff;
         }
-        
+
         .filter-buttons {
             display: flex;
             gap: 1rem;
         }
-        
+
         .filter-btn {
             padding: 0.5rem 1.5rem;
             background: #252525;
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .filter-btn:hover,
         .filter-btn.active {
             background: #4da3ff;
             border-color: #4da3ff;
         }
-        
+
         .table-container {
             background: #1a1a1a;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+
         thead {
             background: #252525;
         }
-        
+
         th {
             padding: 1rem;
             text-align: left;
             font-weight: 600;
             color: #4da3ff;
         }
-        
+
         td {
             padding: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+
         tbody tr:hover {
             background: rgba(77, 163, 255, 0.05);
         }
-        
+
         .status-badge {
             padding: 0.25rem 0.75rem;
             border-radius: 12px;
@@ -139,28 +140,28 @@
             font-weight: 600;
             display: inline-block;
         }
-        
+
         .status-pending {
             background: #ff9800;
             color: white;
         }
-        
+
         .status-in_progress {
             background: #2196f3;
             color: white;
         }
-        
+
         .status-completed {
             background: #4caf50;
             color: white;
         }
-        
+
         .action-btns {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
         }
-        
+
         .action-btn {
             padding: 0.4rem 0.8rem;
             border: none;
@@ -171,28 +172,28 @@
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .btn-view {
             background: #4da3ff;
             color: white;
         }
-        
+
         .btn-delete {
             background: #f44336;
             color: white;
         }
-        
+
         .action-btn:hover {
             opacity: 0.8;
             transform: scale(1.05);
         }
-        
+
         .no-data {
             text-align: center;
             padding: 3rem;
             color: #666;
         }
-        
+
         .modal {
             display: none;
             position: fixed;
@@ -200,16 +201,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
-        
+
         .modal.active {
             display: flex;
         }
-        
+
         .modal-content {
             background: #1a1a1a;
             padding: 2rem;
@@ -220,7 +221,7 @@
             overflow-y: auto;
             position: relative;
         }
-        
+
         .modal-close {
             position: absolute;
             top: 1rem;
@@ -230,43 +231,43 @@
             color: #666;
             transition: color 0.3s;
         }
-        
+
         .modal-close:hover {
             color: #fff;
         }
-        
+
         .detail-row {
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .detail-label {
             color: #4da3ff;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        
+
         .detail-value {
             color: #ccc;
         }
-        
+
         .status-form {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .status-form select {
             width: 100%;
             padding: 0.75rem;
             background: #252525;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             color: #fff;
             margin-bottom: 1rem;
         }
-        
+
         .status-form button {
             width: 100%;
             padding: 0.75rem;
@@ -277,44 +278,49 @@
             cursor: pointer;
             font-weight: 600;
         }
-        
+
         @media (max-width: 768px) {
             .filter-buttons {
                 flex-wrap: wrap;
             }
-            
+
             .table-container {
                 overflow-x: auto;
             }
-            
+
             table {
                 min-width: 800px;
             }
         }
     </style>
 </head>
+
 <body>
     <header class="admin-header">
         <div class="admin-logo">🎯 ByCodeHub Admin</div>
         <nav class="admin-nav">
-            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('admin_submissions') }}">Submissions</a>
-            <a href="{{ url_for('home') }}" target="_blank">View Site</a>
-            <a href="{{ url_for('admin_logout') }}" class="logout-btn">Logout</a>
+            <a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('admin.admin_submissions') }}">Submissions</a>
+            <a href="{{ url_for('main.home') }}" target="_blank">View Site</a>
+            <a href="{{ url_for('admin.admin_logout') }}" class="logout-btn">Logout</a>
         </nav>
     </header>
-    
+
     <div class="container">
         <div class="page-header">
             <h1 class="page-title">Project Submissions</h1>
             <div class="filter-buttons">
-                <a href="{{ url_for('admin_submissions', status='all') }}" class="filter-btn {{ 'active' if current_status == 'all' else '' }}">All</a>
-                <a href="{{ url_for('admin_submissions', status='pending') }}" class="filter-btn {{ 'active' if current_status == 'pending' else '' }}">Pending</a>
-                <a href="{{ url_for('admin_submissions', status='in_progress') }}" class="filter-btn {{ 'active' if current_status == 'in_progress' else '' }}">In Progress</a>
-                <a href="{{ url_for('admin_submissions', status='completed') }}" class="filter-btn {{ 'active' if current_status == 'completed' else '' }}">Completed</a>
+                <a href="{{ url_for('admin.admin_submissions', status='all') }}"
+                    class="filter-btn {{ 'active' if current_status == 'all' else '' }}">All</a>
+                <a href="{{ url_for('admin.admin_submissions', status='pending') }}"
+                    class="filter-btn {{ 'active' if current_status == 'pending' else '' }}">Pending</a>
+                <a href="{{ url_for('admin.admin_submissions', status='in_progress') }}"
+                    class="filter-btn {{ 'active' if current_status == 'in_progress' else '' }}">In Progress</a>
+                <a href="{{ url_for('admin.admin_submissions', status='completed') }}"
+                    class="filter-btn {{ 'active' if current_status == 'completed' else '' }}">Completed</a>
             </div>
         </div>
-        
+
         <div class="table-container">
             {% if submissions %}
             <table>
@@ -348,8 +354,11 @@
                         <td>{{ sub.created_at.strftime('%Y-%m-%d') }}</td>
                         <td>
                             <div class="action-btns">
-                                <button class="action-btn btn-view" onclick="viewSubmission({{ sub.id }}, '{{ sub.name }}', '{{ sub.email }}', '{{ sub.phone }}', '{{ sub.project_type }}', '{{ sub.budget or '' }}', '{{ sub.deadline or '' }}', '{{ sub.message }}', '{{ sub.status }}', '{{ sub.created_at.strftime('%Y-%m-%d %H:%M') }}')">View</button>
-                                <form action="{{ url_for('delete_submission', id=sub.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this submission?')">
+                                <button class="action-btn btn-view"
+                                    onclick="viewSubmission({{ sub.id }}, '{{ sub.name }}', '{{ sub.email }}', '{{ sub.phone }}', '{{ sub.project_type }}', '{{ sub.budget or '' }}', '{{ sub.deadline or '' }}', '{{ sub.message }}', '{{ sub.status }}', '{{ sub.created_at.strftime('%Y-%m-%d %H:%M') }}')">View</button>
+                                <form action="{{ url_for('admin.delete_submission', id=sub.id) }}" method="POST"
+                                    style="display:inline;"
+                                    onsubmit="return confirm('Are you sure you want to delete this submission?')">
                                     <button type="submit" class="action-btn btn-delete">Delete</button>
                                 </form>
                             </div>
@@ -361,63 +370,64 @@
             {% else %}
             <div class="no-data">
                 <h3>No submissions found</h3>
-                <p>{{ 'No ' + current_status + ' submissions' if current_status != 'all' else 'No submissions yet' }}</p>
+                <p>{{ 'No ' + current_status + ' submissions' if current_status != 'all' else 'No submissions yet' }}
+                </p>
             </div>
             {% endif %}
         </div>
     </div>
-    
+
     <!-- Detail Modal -->
     <div class="modal" id="detailModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <h2 style="color: #4da3ff; margin-bottom: 1.5rem;">Submission Details</h2>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Submission ID</div>
                 <div class="detail-value" id="detail-id"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Client Name</div>
                 <div class="detail-value" id="detail-name"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Email</div>
                 <div class="detail-value" id="detail-email"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Phone</div>
                 <div class="detail-value" id="detail-phone"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Project Type</div>
                 <div class="detail-value" id="detail-project"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Budget</div>
                 <div class="detail-value" id="detail-budget"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Deadline</div>
                 <div class="detail-value" id="detail-deadline"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Submitted On</div>
                 <div class="detail-value" id="detail-date"></div>
             </div>
-            
+
             <div class="detail-row">
                 <div class="detail-label">Project Description</div>
                 <div class="detail-value" id="detail-message" style="white-space: pre-wrap;"></div>
             </div>
-            
+
             <form class="status-form" id="statusForm" method="POST">
                 <div class="detail-label">Update Status</div>
                 <select name="status" id="status-select">
@@ -429,7 +439,7 @@
             </form>
         </div>
     </div>
-    
+
     <script>
         function viewSubmission(id, name, email, phone, project, budget, deadline, message, status, date) {
             document.getElementById('detail-id').textContent = '#' + id;
@@ -442,30 +452,31 @@
             document.getElementById('detail-message').textContent = message;
             document.getElementById('detail-date').textContent = date;
             document.getElementById('status-select').value = status;
-            
+
             const form = document.getElementById('statusForm');
             form.action = `/admin/submission/${id}/update`;
-            
+
             document.getElementById('detailModal').classList.add('active');
         }
-        
+
         function closeModal() {
             document.getElementById('detailModal').classList.remove('active');
         }
-        
+
         // Close modal on outside click
-        document.getElementById('detailModal').addEventListener('click', function(e) {
+        document.getElementById('detailModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeModal();
             }
         });
-        
+
         // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
     </script>
 </body>
+
 </html>

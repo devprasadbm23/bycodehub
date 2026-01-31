@@ -201,6 +201,63 @@ app.run(debug=False)
    - PostgreSQL for production
    - Update DATABASE_URI in app.py
 
+## 🚀 Render.com Deployment
+
+This project is ready for deployment on Render (or similar hosts that provide PostgreSQL). Follow these steps to deploy and verify environment variables.
+
+- **Set environment variables in Render dashboard** (Service → Environment):
+    - `DATABASE_URL` — your Render Postgres connection string (example: `postgresql://user:pass@host:port/dbname`)
+    - `SECRET_KEY` — a strong secret
+    - `MAIL_USERNAME`, `MAIL_PASSWORD` — SMTP credentials
+    - `ADMIN_USERNAME`, `ADMIN_PASSWORD` — initial admin credentials
+    - `PGSSLMODE` — set to `require` for secure DB connections
+
+- **Build & Start commands** (already set in `render.yaml` and `Procfile`):
+    - Build command: `pip install -r requirements.txt && flask db upgrade`
+    - Start command: `gunicorn app:app` (also provided by `Procfile`)
+
+- **After deploy — verify:**
+    1. Open Render service → **Logs** and watch the build + startup output.
+    2. Confirm `flask db upgrade` ran successfully (look for migration output in logs).
+    3. Visit your service URL; confirm the site loads and admin login works.
+    4. If DB issues appear, open a Render shell/psql (Render provides DB access) and inspect tables.
+
+- **Local testing with the same DB URL**:
+    ```powershell
+    pip install -r requirements.txt
+    flask db upgrade
+    python app.py
+    ```
+
+If you want me to update the Render dashboard programmatically (create env vars, trigger deploys), I can add a small script that uses the Render API — but I'll need an API key and permission from you to proceed.
+
+### Automating Render env vars & deploys
+
+I added `render_manage.py` to help create/update env vars and trigger manual deploys via the Render API. It requires a Render API key and the target service ID.
+
+Quick usage:
+
+```powershell
+# Export your API key (PowerShell example)
+$env:RENDER_API_KEY = "<your-api-key>"
+
+# Upsert a single env var
+python render_manage.py --service-id <service-id> --set DATABASE_URL "postgresql://..."
+
+# Upsert from a local .env file
+python render_manage.py --service-id <service-id> --set-file .env.local
+
+# Trigger a manual deploy
+python render_manage.py --service-id <service-id> --deploy
+```
+
+Notes:
+- Keep your `RENDER_API_KEY` secret; do not commit it to the repo.
+- You can find the service ID in the Render dashboard URL for your service (it appears as a long ID in network/API calls or the dashboard URL).
+- The script uses the Render REST API; ensure the API key has service and deploy permissions.
+
+If you want, provide a short-lived API key and I can run these steps for you, or I can guide you through running the commands locally.
+
 ## 📧 Email Templates
 
 ### Client Confirmation Email

@@ -172,7 +172,20 @@ def update_submission_status(id):
     if new_status in ['pending', 'in_progress', 'completed']:
         submission.status = new_status
         db.session.commit()
-        flash('Status updated successfully', 'success')
+        
+        # Send status update email to customer
+        try:
+            status_msg = Message(
+                subject=f"Project Status Update - ByCodeHub",
+                sender=current_app.config['MAIL_USERNAME'],
+                recipients=[submission.email]
+            )
+            status_msg.html = render_template('email_status_update.html', submission=submission)
+            mail.send(status_msg)
+            flash('Status updated and notification sent to customer', 'success')
+        except Exception as e:
+            flash('Status updated but email notification failed', 'warning')
+            print(f"Error sending status update email: {e}")
     
     return redirect(url_for('admin.admin_submissions'))
 
