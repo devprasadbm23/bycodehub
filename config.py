@@ -11,6 +11,20 @@ class Config:
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # If psycopg (psycopg3) is used, prefer SQLAlchemy driver scheme 'postgresql+psycopg'
+    if DATABASE_URL and (DATABASE_URL.startswith('postgres://') or DATABASE_URL.startswith('postgresql://')):
+        # If the URL doesn't already specify a driver, add '+psycopg' so SQLAlchemy uses psycopg3
+        if 'postgresql+psycopg' not in DATABASE_URL and 'postgresql+psycopg://' not in DATABASE_URL:
+            if DATABASE_URL.startswith('postgres://'):
+                # normalize legacy postgres:// to postgresql+psycopg://
+                SQLALCHEMY_DATABASE_URI = DATABASE_URL.replace('postgres://', 'postgresql+psycopg://', 1)
+            else:
+                SQLALCHEMY_DATABASE_URI = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg://', 1)
+        else:
+            SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    else:
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+
     # Engine options: when using PostgreSQL/Neon, ensure SSL is used.
     # Set PGSSLMODE env var to override (default: 'require').
     SQLALCHEMY_ENGINE_OPTIONS = {}
