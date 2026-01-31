@@ -172,62 +172,61 @@ const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
-        const nameField = document.getElementById('name');
-        const emailField = document.getElementById('email');
-        const phoneField = document.getElementById('phone');
-        const projectField = document.getElementById('project');
-        const messageField = document.getElementById('message');
+        // The form uses Flask-WTF form fields rendered as HTML
+        // Check for the actual field names in the rendered form
+        const nameField = document.querySelector('input[name="name"]');
+        const emailField = document.querySelector('input[name="email"]');
+        const phoneField = document.querySelector('input[name="phone"]');
+        const projectField = document.querySelector('select[name="project_type"]');
+        const messageField = document.querySelector('textarea[name="message"]');
         
-        // Ensure all fields exist before accessing
-        if (!nameField || !emailField || !phoneField || !projectField || !messageField) {
-            console.error('One or more form fields are missing from the DOM');
-            return;
-        }
-        
-        const name = nameField.value.trim();
-        const email = emailField.value.trim();
-        const phone = phoneField.value.trim();
-        const project = projectField.value;
-        const message = messageField.value.trim();
-        
-        let isValid = true;
-        let errorMessage = '';
-        
-        // Name validation
-        if (name.length < 3) {
-            isValid = false;
-            errorMessage += 'Name must be at least 3 characters long.\n';
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            isValid = false;
-            errorMessage += 'Please enter a valid email address.\n';
-        }
-        
-        // Phone validation
-        const phoneRegex = /^[+]?[\d\s-]{10,}$/;
-        if (!phoneRegex.test(phone)) {
-            isValid = false;
-            errorMessage += 'Please enter a valid phone number.\n';
-        }
-        
-        // Project type validation
-        if (!project) {
-            isValid = false;
-            errorMessage += 'Please select a project type.\n';
-        }
-        
-        // Message validation
-        if (message.length < 20) {
-            isValid = false;
-            errorMessage += 'Project description must be at least 20 characters.\n';
-        }
-        
-        if (!isValid) {
-            e.preventDefault();
-            alert(errorMessage);
+        // Basic validation only if all fields exist
+        if (nameField && emailField && phoneField && projectField && messageField) {
+            const name = nameField.value.trim();
+            const email = emailField.value.trim();
+            const phone = phoneField.value.trim();
+            const project = projectField.value;
+            const message = messageField.value.trim();
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            // Name validation
+            if (name.length < 3) {
+                isValid = false;
+                errorMessage += 'Name must be at least 3 characters long.\n';
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                isValid = false;
+                errorMessage += 'Please enter a valid email address.\n';
+            }
+            
+            // Phone validation
+            const phoneRegex = /^[+]?[\d\s-]{10,}$/;
+            if (!phoneRegex.test(phone)) {
+                isValid = false;
+                errorMessage += 'Please enter a valid phone number.\n';
+            }
+            
+            // Project type validation
+            if (!project) {
+                isValid = false;
+                errorMessage += 'Please select a project type.\n';
+            }
+            
+            // Message validation
+            if (message.length < 20) {
+                isValid = false;
+                errorMessage += 'Project description must be at least 20 characters.\n';
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert(errorMessage);
+            }
         }
     });
     
