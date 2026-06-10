@@ -4,7 +4,9 @@ Run this script once to populate your portfolio with completed projects
 Usage: python add_projects.py
 """
 
-from app import app, db, Portfolio, Testimonial
+from app import app
+from extensions import db
+from models import Portfolio, Testimonial
 from datetime import datetime
 
 def add_portfolio_projects():
@@ -239,7 +241,7 @@ def display_statistics():
         print(f"   Approved: {approved_testimonials}")
         
         # Submission statistics
-        from app import Submission
+        from models import Submission
         total_submissions = Submission.query.count()
         pending = Submission.query.filter_by(status='pending').count()
         in_progress = Submission.query.filter_by(status='in_progress').count()
